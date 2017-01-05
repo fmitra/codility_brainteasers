@@ -1,3 +1,5 @@
+*.go
+
 # Elastic Beanstalk Files
 ######################
 .elasticbeanstalk/*
