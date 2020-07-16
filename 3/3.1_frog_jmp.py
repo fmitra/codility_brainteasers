@@ -1,6 +1,6 @@
 """
-A small frog wants to get to the other side of the road. The frog is currently 
-located at position X and wants to get to a position greater than or equal to Y. 
+A small frog wants to get to the other side of the road. The frog is currently
+located at position X and wants to get to a position greater than or equal to Y.
 The small frog always jumps a fixed distance, D.
 
 Count the minimal number of jumps that the small frog must perform to reach its target.
@@ -8,7 +8,7 @@ Count the minimal number of jumps that the small frog must perform to reach its 
 Write a function:
 
 int solution(int X, int Y, int D);
-that, given three integers X, Y and D, returns the minimal number of jumps from 
+that, given three integers X, Y and D, returns the minimal number of jumps from
 position X to a position equal to or greater than Y.
 
 For example, given:
@@ -29,8 +29,10 @@ Complexity:
 
 expected worst-case time complexity is O(1);
 expected worst-case space complexity is O(1).
+
 """
+import math
+
 def solution(X, Y, D):
-    distance = (Y - X)
-    J = math.ceil(distance / float(D))
-    return int(J)
+    distance = Y - X
+    return math.ceil(distance/D)

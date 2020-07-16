@@ -1,6 +1,6 @@
 """
-A zero-indexed array A consisting of N different integers is given. The array 
-contains integers in the range [1..(N + 1)], which means that exactly one 
+A zero-indexed array A consisting of N different integers is given. The array
+contains integers in the range [1..(N + 1)], which means that exactly one
 element is missing.
 
 Your goal is to find that missing element.
@@ -26,14 +26,15 @@ each element of array A is an integer within the range [1..(N + 1)].
 Complexity:
 
 expected worst-case time complexity is O(N);
-expected worst-case space complexity is O(1), beyond input storage (not counting 
+expected worst-case space complexity is O(1), beyond input storage (not counting
 the storage required for input arguments).
 Elements of input arrays can be modified.
+
 """
 def solution(A):
     ln = len(A)
     total = sum(A)
     # https://en.wikipedia.org/wiki/1_%2B_2_%2B_3_%2B_4_%2B_%E2%8B%AF
-    area = ((ln+1)*(ln+2)) / 2
-    
+    area = ((ln+1)*(ln+2)) // 2
+
     return area - total
