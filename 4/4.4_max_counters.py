@@ -1,10 +1,10 @@
 """
-You are given N counters, initially set to 0, and you have two possible operations 
+You are given N counters, initially set to 0, and you have two possible operations
 on them:
 
 increase(X) − counter X is increased by 1,
 max counter − all counters are set to the maximum value of any counter.
-A non-empty zero-indexed array A of M integers is given. This array represents 
+A non-empty zero-indexed array A of M integers is given. This array represents
 consecutive operations:
 
 if A[K] = X, such that 1 ≤ X ≤ N, then operation K is increase(X),
@@ -38,7 +38,7 @@ struct Results {
 Write a function:
 
 struct Results solution(int N, int A[], int M);
-that, given an integer N and a non-empty zero-indexed array A consisting of M integers, 
+that, given an integer N and a non-empty zero-indexed array A consisting of M integers,
 returns a sequence of integers representing the values of the counters.
 
 The sequence should be returned as:
@@ -65,39 +65,31 @@ each element of array A is an integer within the range [1..N + 1].
 Complexity:
 
 expected worst-case time complexity is O(N+M);
-expected worst-case space complexity is O(N), beyond input storage (not counting the 
+expected worst-case space complexity is O(N), beyond input storage (not counting the
 storage required for input arguments).
 Elements of input arrays can be modified.
+
 """
 def solution(N, A):
     max_counter = 0
     all_max = 0
     arrayLen = len(A)
-    
     # Counters
     counters = [0] * N
-        
-    for i in xrange(arrayLen):
+    for i in range(arrayLen):
         X = A[i]
-        
         # Increase X by 1
         if 1 <= X <= N:
             if all_max > 0 and counters[X-1] < all_max:
                 counters[X-1] = all_max + 1
             else:
                 counters[X-1] += 1
-                
             if max_counter < counters[X-1]:
                 max_counter = counters[X-1]
-                
         # Set all counters to max counter
         if X == N + 1:
             all_max = max_counter
-    
-    for i in xrange(N):
+    for i in range(N):
         if counters[i] < all_max:
             counters[i] = all_max
-        
     return counters
-
-
