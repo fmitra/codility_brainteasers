@@ -1,5 +1,5 @@
 """
-A non-empty zero-indexed array A consisting of N integers is given. The product 
+A non-empty zero-indexed array A consisting of N integers is given. The product
 of triplet (P, Q, R) equates to A[P] * A[Q] * A[R] (0 ≤ P < Q < R < N).
 
 For example, array A such that:
@@ -20,7 +20,7 @@ Your goal is to find the maximal product of any triplet.
 Write a function:
 
 int solution(int A[], int N);
-that, given a non-empty zero-indexed array A, returns the value of the maximal product 
+that, given a non-empty zero-indexed array A, returns the value of the maximal product
 of any triplet.
 
 For example, given array A such that:
@@ -40,14 +40,15 @@ each element of array A is an integer within the range [−1,000..1,000].
 Complexity:
 
 expected worst-case time complexity is O(N*log(N));
-expected worst-case space complexity is O(1), beyond input storage (not counting the 
+expected worst-case space complexity is O(1), beyond input storage (not counting the
 storage required for input arguments).
 Elements of input arrays can be modified.
+
 """
 def solution(A):
     ln = len(A)
     A.sort()
     product_1 = A[ln-1] * A[ln-2] * A[ln-3]
     product_2 = A[ln-1] * A[0] * A[1]
-                
+
     return product_1 if product_1 > product_2 else product_2

@@ -1,5 +1,5 @@
 """
-A string S consisting of N characters is considered to be properly nested 
+A string S consisting of N characters is considered to be properly nested
 if any of the following conditions is true:
 
 S is empty;
@@ -10,68 +10,60 @@ For example, the string "{[()()]}" is properly nested but "([)()]" is not.
 Write a function:
 
 int solution(char *S);
-that, given a string S consisting of N characters, returns 1 if S is 
+that, given a string S consisting of N characters, returns 1 if S is
 properly nested and 0 otherwise.
 
-For example, given S = "{[()()]}", the function should return 1 and given 
+For example, given S = "{[()()]}", the function should return 1 and given
 S = "([)()]", the function should return 0, as explained above.
 
 Assume that:
 
 N is an integer within the range [0..200,000];
-string S consists only of the following characters: "(", "{", "[", "]", "}" 
+string S consists only of the following characters: "(", "{", "[", "]", "}"
 and/or ")".
 Complexity:
 
 expected worst-case time complexity is O(N);
-expected worst-case space complexity is O(N) (not counting the storage 
+expected worst-case space complexity is O(N) (not counting the storage
 required for input arguments).
+
 """
 def solution(S):
-    openers = "{[("
-    closers = "}])"
-    sets = zip(openers, closers)
+    if not S:
+        return 1
+
+    # It can never be properly nested with an odd number of elements
     ln = len(S)
-    if S == "":
-        return 1
-    
-    if S[0] in closers:
+    if ln % 2 != 0:
         return 0
-        
-    validated = []
-    last_opener = []
-    total_opens = 0
-    total_closes = 0
-    for i in xrange(ln):
-        c = S[i]
-        if len(validated) == 0 or c in openers:
-            validated.append(c)
-            last_opener.append(c)
-            total_opens += 1
-            
-        if c in closers:
-            p = validated[-1:][0]
-            o = [s for s in sets if s[1] == c][0][0]
-            closed = False
-            if len(last_opener) == 0:
-                return 0
-            
-            if p in closers and o != last_opener[-1:][0]:
-                return 0
-            else:
-                closed = True
-                
-            if p not in closers and o != p:
-                return 0
-            else:
-                closed = True
-            
-            if closed:
-                validated.append(c)
-                last_opener.pop()
-                total_closes += 1
-    
-    if total_closes == total_opens:
-        return 1
-    else:
+
+    open_close_map = {
+        '{': '}',
+        '[': ']',
+        '(': ')',
+    }
+
+    # A closer should always match that most recent opener in the list,
+    # given the mapping above. If it does not match, it's not nested.
+    openers = []
+    for v in S:
+        is_opener = v in open_close_map
+        is_closer = not is_opener
+
+        if is_opener:
+            openers.append(v)
+            continue
+
+        if is_closer and not openers:
+            return 0
+
+        last_opener = openers.pop()
+        closer = open_close_map[last_opener]
+        if v != closer:
+            return 0
+
+    # There are openers leftover that have not been closed
+    if openers:
         return 0
+
+    return 1

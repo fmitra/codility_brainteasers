@@ -1,11 +1,11 @@
 """
-We draw N discs on a plane. The discs are numbered from 0 to N − 1. A 
-zero-indexed array A of N non-negative integers, specifying the radiuses 
-of the discs, is given. The J-th disc is drawn with its center at (J, 0) 
+We draw N discs on a plane. The discs are numbered from 0 to N − 1. A
+zero-indexed array A of N non-negative integers, specifying the radiuses
+of the discs, is given. The J-th disc is drawn with its center at (J, 0)
 and radius A[J].
 
-We say that the J-th disc and K-th disc intersect if J ≠ K and the J-th and 
-K-th discs have at least one common point (assuming that the discs contain 
+We say that the J-th disc and K-th disc intersect if J != K and the J-th and
+K-th discs have at least one common point (assuming that the discs contain
 their borders).
 
 The figure below shows discs drawn for N = 6 and A as follows:
@@ -24,8 +24,8 @@ disc 2 also intersects with discs 0 and 3.
 Write a function:
 
 int solution(int A[], int N);
-that, given an array A describing N discs as explained above, returns the 
-number of (unordered) pairs of intersecting discs. The function should 
+that, given an array A describing N discs as explained above, returns the
+number of (unordered) pairs of intersecting discs. The function should
 return −1 if the number of intersecting pairs exceeds 10,000,000.
 
 Given array A shown above, the function should return 11, as explained above.
@@ -37,32 +37,30 @@ each element of array A is an integer within the range [0..2,147,483,647].
 Complexity:
 
 expected worst-case time complexity is O(N*log(N));
-expected worst-case space complexity is O(N), beyond input storage (not counting 
+expected worst-case space complexity is O(N), beyond input storage (not counting
 the storage required for input arguments).
 Elements of input arrays can be modified.
+
 """
-def solution(A): 
+def solution(A):
     ln = len(A)
     upper = []
     lower = []
     intersections = 0
     j = 0
-    
-    for i in xrange(ln):
+
+    for i in range(ln):
         upper.append(i + A[i])
         lower.append(i - A[i])
-    
+
     upper.sort()
     lower.sort()
-    
-    for i in xrange(ln):
+
+    for i in range(ln):
         while j < ln and upper[i] >= lower[j]:
             intersections += j-i
             j += 1
         if intersections > 1e7:
             return -1
-        
+
     return intersections
-
-
-

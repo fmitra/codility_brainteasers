@@ -9,10 +9,10 @@ For example, string "(()(())())" is properly nested but string "())" isn't.
 Write a function:
 
 int solution(char *S);
-that, given a string S consisting of N characters, returns 1 if string 
+that, given a string S consisting of N characters, returns 1 if string
 S is properly nested and 0 otherwise.
 
-For example, given S = "(()(())())", the function should return 1 and 
+For example, given S = "(()(())())", the function should return 1 and
 given S = "())", the function should return 0, as explained above.
 
 Assume that:
@@ -22,15 +22,24 @@ string S consists only of the characters "(" and/or ")".
 Complexity:
 
 expected worst-case time complexity is O(N);
-expected worst-case space complexity is O(1) (not counting the storage 
+expected worst-case space complexity is O(1) (not counting the storage
 required for input arguments).
+
 """
 def solution(S):
-    stack = []
+    if not S:
+        return 1
+
+    openers = []
     for i in S:
-        if len(stack) and stack[-1] == "(" and i == ")":
-            stack.pop()
+        if i == '(':
+            openers.append(i)
             continue
-        stack.append(i)
-    
-    return 1 if len(stack) == 0 else 0
+        # We have a closing element with
+        # no opener
+        if not len(openers):
+            return 0
+        openers.pop()
+
+    is_stack_empty = not openers
+    return 1 if is_stack_empty else 0

@@ -1,5 +1,5 @@
 """
-A zero-indexed array A consisting of N integers is given. A triplet 
+A zero-indexed array A consisting of N integers is given. A triplet
 (P, Q, R) is triangular if 0 ≤ P < Q < R < N and:
 
 A[P] + A[Q] > A[R],
@@ -14,7 +14,7 @@ Triplet (0, 2, 4) is triangular.
 Write a function:
 
 int solution(int A[], int N);
-that, given a zero-indexed array A consisting of N integers, returns 1 if 
+that, given a zero-indexed array A consisting of N integers, returns 1 if
 there exists a triangular triplet for this array and returns 0 otherwise.
 
 For example, given array A such that:
@@ -34,16 +34,17 @@ each element of array A is an integer within the range [−2,147,483,648..2,147,
 Complexity:
 
 expected worst-case time complexity is O(N*log(N));
-expected worst-case space complexity is O(N), beyond input storage (not 
+expected worst-case space complexity is O(N), beyond input storage (not
 counting the storage required for input arguments).
 Elements of input arrays can be modified.
+
 """
 def solution(A):
     ln = len(A)
     if ln < 3:
         return 0
     A.sort()
-    for i in xrange(ln-2):
+    for i in range(ln-2):
         if A[i] + A[i+1] > A[i+2]:
             return 1
     return 0
